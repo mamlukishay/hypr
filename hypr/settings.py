@@ -119,3 +119,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DATA_DIR = '/Users/ishaymamluk/play/hypr/data'
+HANDLERS_FILENAME = 'handlers.txt'
