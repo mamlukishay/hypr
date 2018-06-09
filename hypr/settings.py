@@ -120,5 +120,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-DATA_DIR = '/Users/ishaymamluk/play/hypr/data'
-PROFILE_PICS_FILENAME = 'handlers.txt'
+USER_DATA_DIR = '/Users/ishaymamluk/play/hypr/data'

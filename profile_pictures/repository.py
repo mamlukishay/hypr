@@ -1,8 +1,11 @@
-import os.path
+import os, os.path
 from django.conf import settings
 
-KEYVAL_DELIMITER = ':'
-PROFILE_PICS_PATH = os.path.join(settings.DATA_DIR, settings.PROFILE_PICS_FILENAME)
+BASE_DIR = settings.USER_DATA_DIR
+RESOURCE_TYPE = 'profile-picture'
+
+def path_for(key):
+  return os.path.join(BASE_DIR, key, f'{RESOURCE_TYPE}.txt')
 
 def set(key, value):
   if get(key) == None:
@@ -11,43 +14,32 @@ def set(key, value):
   return value
 
 def get(key):
-  if not os.path.exists(PROFILE_PICS_PATH):
+  path = path_for(key)
+
+  if not os.path.exists(path):
     return None
 
-  with open(PROFILE_PICS_PATH) as file:
-    current_val = True
-    while current_val:
-      current_key, current_val = read_keyval_pair(file)
-      print(f'CURRKEY: {current_key} <> {key} KEYTOGET')
-      if current_key == key:
-        print('YESH!', current_val)
-        return current_val
+  with open(path) as file:
+    value = file.read()
 
-  print('NO HAY!')
-  return None
+  return value
 
 def get_all():
   values = []
 
-  if not os.path.exists(PROFILE_PICS_PATH):
+  if not os.path.exists(BASE_DIR):
     return values
 
-  with open(PROFILE_PICS_PATH) as file:
-    current_val = True
-    while current_val:
-      current_key, current_val = read_keyval_pair(file)
-      values.append (current_val)
+  for key in os.listdir(BASE_DIR):
+    with open(path_for(key)) as file:
+      values.append(file.read())
 
   return values
 
 def write(key, value):
-  with open(PROFILE_PICS_PATH, 'a+') as file:
-    file.writelines([
-      f'{key}\r\n',
-      f'{value}\r\n'
-    ])
+  target_dir = os.path.join(BASE_DIR, key)
+  os.makedirs(target_dir)
+  target_file = path_for(key)
 
-def read_keyval_pair(file):
-  key = file.readline().strip()
-  value = file.readline().strip()
-  return (key, value)
+  with open(target_file, 'a+') as file:
+    file.write(value)
