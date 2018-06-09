@@ -1,15 +1,16 @@
 
 import os
 import os.path
+from django.conf import settings
 
+BASE_DIR = settings.DATA_DIR
 class FileSystemRepo:
-  def __init__(self, base_dir, resource_type):
-    self.base_dir = base_dir
+  def __init__(self, resource_type):
     self.resource_type = resource_type
 
 
   def path_for(self, key):
-    return os.path.join(self.base_dir, key, f'{self.resource_type}.txt')
+    return os.path.join(BASE_DIR, key, f'{self.resource_type}.txt')
 
 
   def set(self, key, value):
@@ -34,18 +35,25 @@ class FileSystemRepo:
   def get_all(self):
     values = []
 
-    if not os.path.exists(self.base_dir):
+    if not os.path.exists(BASE_DIR):
       return values
 
-    for key in os.listdir(self.base_dir):
+    for key in os.listdir(BASE_DIR):
       with open(self.path_for(key)) as file:
         values.append(file.read())
 
     return values
 
 
+  def keys(self):
+    if not os.path.exists(BASE_DIR):
+      return []
+      
+    return os.listdir(BASE_DIR)
+
+
   def write(self, key, value):
-    target_dir = os.path.join(self.base_dir, key)
+    target_dir = os.path.join(BASE_DIR, key)
     os.makedirs(target_dir)
     target_file = self.path_for(key)
 

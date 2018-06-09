@@ -5,7 +5,7 @@ from services.twitter import profile_pic_url_for_handler
 
 def index(request):
   if request.method == 'GET':
-    handles = ProfilePicturesRepo().get_all()
+    handles = ProfilePicturesRepo().keys()
     return JsonResponse({'handles': handles})
   if request.method == 'POST':
     payload = json.loads(request.body)

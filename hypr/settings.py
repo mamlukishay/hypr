@@ -120,4 +120,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-USER_DATA_DIR = '/Users/ishaymamluk/play/hypr/data'
+DATA_DIR = '/Users/ishaymamluk/play/hypr/data'
