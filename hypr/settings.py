@@ -121,4 +121,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DATA_DIR = '/Users/ishaymamluk/play/hypr/data'
-HANDLERS_FILENAME = 'handlers.txt'
+PROFILE_PICS_FILENAME = 'handlers.txt'
