@@ -14,8 +14,14 @@ class FileSystemRepo:
 
 
   def set(self, key, value):
-    if self.get(key) == None:
-      self.write(key, value)
+    target_dir = os.path.join(BASE_DIR, key)
+    
+    if not os.path.exists(target_dir):
+      os.makedirs(target_dir)
+    
+    target_file = self.path_for(key)
+    with open(target_file, 'w+') as file:
+      file.write(value)
 
     return value
 
@@ -48,14 +54,6 @@ class FileSystemRepo:
   def keys(self):
     if not os.path.exists(BASE_DIR):
       return []
-      
+
     return os.listdir(BASE_DIR)
 
-
-  def write(self, key, value):
-    target_dir = os.path.join(BASE_DIR, key)
-    os.makedirs(target_dir)
-    target_file = self.path_for(key)
-
-    with open(target_file, 'w+') as file:
-      file.write(value)
