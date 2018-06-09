@@ -1,11 +1,11 @@
 import json
 from django.http import JsonResponse
-from profile_pictures import repository as profile_pics_repo
+from profile_pictures.repositories import ProfilePicturesRepo
 from services.twitter import profile_pic_url_for_handler
 
 def index(request):
   if request.method == 'GET':
-    handles = profile_pics_repo.get_all()
+    handles = ProfilePicturesRepo().get_all()
     return JsonResponse({'handles': handles})
   if request.method == 'POST':
     payload = json.loads(request.body)
@@ -14,5 +14,5 @@ def index(request):
 
 def store_profile_pic_for_handle(handle):
   pic_url = profile_pic_url_for_handler(handle)
-  profile_pics_repo.set(key=handle, value=pic_url)
+  ProfilePicturesRepo().set(key=handle, value=pic_url)
   return pic_url
