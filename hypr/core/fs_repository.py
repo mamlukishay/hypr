@@ -4,8 +4,8 @@ import os.path
 from django.conf import settings
 
 BASE_DIR = settings.DATA_DIR
-class FileSystemRepo:
-  def __init__(self, resource_type):
+class FileSystemRepoMixin:
+  def __init__(self, resource_type = None):
     self.resource_type = resource_type
 
 
