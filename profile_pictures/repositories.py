@@ -1,5 +1,5 @@
-from hypr.core.fs_repository import FileSystemRepo
+from hypr.core.fs_repository import FileSystemRepoMixin
 
-class ProfilePicturesRepo(FileSystemRepo):
+class ProfilePicturesRepo(FileSystemRepoMixin):
   def __init__(self):
     super().__init__(resource_type='profile_picture')
