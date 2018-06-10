@@ -2,6 +2,9 @@ from profile_pictures.repositories import ProfilePicturesRepo
 from services import twitter
 
 def run(handle):
+  if not handle:
+    return None
+
   profile_pics_repo = ProfilePicturesRepo()
   pic_url = profile_pics_repo.get(handle)
   

@@ -1,5 +1,5 @@
 import json
-from django.http import JsonResponse, HttpResponseNotFound
+from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest
 from profile_pictures.repositories import ProfilePicturesRepo
 from profile_pictures.interactions import store_profile_pic_for_twitter_handle
 
@@ -13,8 +13,12 @@ def index(request):
 
 def create_profile_picture(request):
   payload = json.loads(request.body)
-  profile_pic = store_profile_pic_for_twitter_handle.run(payload['handle'])
-  return JsonResponse({'profile_picture': profile_pic})
+  
+  if payload:
+    profile_pic = store_profile_pic_for_twitter_handle.run(payload['handle'])
+    return JsonResponse({'profile_picture': profile_pic})
+  else:
+    return HttpResponseBadRequest('Missing user handle')
 
 def list_handles():
   handles = ProfilePicturesRepo().keys()
