@@ -11,6 +11,7 @@
 * Persistency is implemented in the fs_repository class, which need two params in order to function properly - a BASE_DIR and a resource_type. With those in place, data is saved as follows:
   * BASE_DIR contains many dirs, each one of them named as a uniqe key (given on a set op.)
   * Each key dir contains files according to the different resource types.
+  
 * Profile pictures are saved with profile_pictures_repo which mixes the fs_repo in and defines the profile_picture resource type, which creates the following sturcture:
   * BASE_DIR
     * handle1
