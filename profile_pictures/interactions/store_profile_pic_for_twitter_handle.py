@@ -1,5 +1,5 @@
 from profile_pictures.repositories import ProfilePicturesRepo
-from services import twitter
+from social_providers import twitter
 
 def run(handle):
   if not handle:
@@ -9,7 +9,8 @@ def run(handle):
   pic_url = profile_pics_repo.get(handle)
   
   if not pic_url:
-    pic_url = twitter.profile_pic_url_for_handle(handle)
+    twitter_user = twitter.User(handle)
+    pic_url = twitter_user.profile_picture()
     profile_pics_repo.set(key=handle, value=pic_url)
   
   return pic_url
