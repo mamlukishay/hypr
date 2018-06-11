@@ -11,7 +11,10 @@
 * Persistency is implemented in the fs_repository class, which need two params in order to function properly - a BASE_DIR and a resource_type. With those in place, data is saved as follows:
   * BASE_DIR contains many dirs, each one of them named as a uniqe key (given on a set op.)
   * Each key dir contains files according to the different resource types.
-  
+
+* The TwitterUser class encapsulates all props and ops related to a twitter user. If needed, this is the place to abstract API calls made to twitter in  order to obtain data. 
+  * I didn't do it because the need is not here yet, but possible way to take this in the future is to add an abstract SocialUser class and have TwitterUser and a future FacebookUser(for example) extend it.
+
 * Profile pictures are saved with profile_pictures_repo which mixes the fs_repo in and defines the profile_picture resource type, which creates the following sturcture:
   * BASE_DIR
     * handle1
