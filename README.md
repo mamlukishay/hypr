@@ -2,7 +2,7 @@
 
 ## A few explanations:
 
-* The reuqested enpoints are implemented under the profile_pictures app, which is meant to encapsulate evrything related to the profile pictures resource (routes, models, repo, interactions...) in a single place
+* The requested enpoints are implemented under the profile_pictures app, which is meant to encapsulate evrything related to the profile pictures resource (routes, models, repo, interactions...) in a single place
 
 * A single endpoint serves both requests: /profile_pictures
   * GET /profile_pictures returns a list of handles that we already scanned and saved to FS
@@ -13,7 +13,7 @@
   * Each key dir contains files according to the different resource types.
 
 * The TwitterUser class encapsulates all props and ops related to a twitter user. If needed, this is the place to abstract API calls made to twitter in  order to obtain data. 
-  * I didn't do it because the need is not here yet, but possible way to take this in the future is to add an abstract SocialUser class and have TwitterUser and a future FacebookUser(for example) extend it.
+  * I didn't do it because the need is not here yet, but possible way to take this in the future is to add an abstract SocialUser class and have TwitterUser and a future FacebookUser(for example) extend it. That way you can have a common interface for social users with concrete inmplementations for each social provider.
 
 * Profile pictures are saved with profile_pictures_repo which mixes the fs_repo in and defines the profile_picture resource type, which creates the following sturcture:
   * BASE_DIR
