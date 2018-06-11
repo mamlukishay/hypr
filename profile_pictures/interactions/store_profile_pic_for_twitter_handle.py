@@ -10,7 +10,7 @@ def run(handle):
   
   if not pic_url:
     twitter_user = twitter.TwitterUser(handle)
-    pic_url = twitter_user.profile_picture()
+    pic_url = twitter_user.profile_picture
     profile_pics_repo.set(key=handle, value=pic_url)
   
   return pic_url
